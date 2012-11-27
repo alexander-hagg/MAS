@@ -47,12 +47,6 @@ class Path():
 	def get_time ( self ):
 		return self.totaltime
 
-	def goal_test ( self, nodelist ):
-		if len( nodelist ) is len( self.nodelist ):
-			return True
-		else:
-			return False
-
 	def add_node( self, node ):
 		self.nodelist.append( node )
 		self.set_time( self.nodelist )
