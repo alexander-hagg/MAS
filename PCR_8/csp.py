@@ -41,7 +41,7 @@ class Path():
 
 	def set_time ( self, path ):
 		for i in range(len( self.nodelist ) - 1):
-			self.totaltime = self.totaltime #+ eDist( i,i+1 )
+			self.totaltime = self.totaltime + eDist( i,i+1 )
 
 	def get_time ( self ):
 		return self.totaltime
