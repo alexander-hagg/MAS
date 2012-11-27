@@ -1,6 +1,7 @@
 import csv,sys
 import math
 import operator
+import copy
 
 class Node:
     #Class containing individual location
@@ -51,14 +52,18 @@ class Path():
 		self.nodelist.append( node )
 		self.set_time( self.nodelist )
 
+	def remove_node(self, node):
+		self.nodelist.remove(node)
+		self.set_time(self.nodelist)
+
 	def checkit (self, nodelist):
 		sofar = self.get_time()
 		for node in nodelist.nodes:
 
 			if node.deadline < sofar:
-				print str(node.id) + str(") TOO FAR: ") + str(node.deadline) + " - " + str(sofar)
+				print str(node.rank) + str(") TOO FAR: ") + str(node.deadline) + " - " + str(sofar)
 				return False
-		print str(node.id) + str(") OK") + str(node.deadline) + " - " + str(sofar)
+		print str(" -- OK -- ")
 		return True
 
 
@@ -86,44 +91,67 @@ def import_data( filename ):
 def edist(pt1, pt2):
 	return math.sqrt( math.pow((pt1[1]-pt2[1]),2) + math.pow((pt1[0]-pt2[0]),2) )
 
-def RBackTracker(path, nodelist,method):
+def RBackTracker(_path, _nodelist,method):
 	#print "Length" + str(len(nodelist.nodes))
+	path = copy.deepcopy(_path)
+	nodelist = copy.deepcopy(_nodelist)
+
+
 	if len(nodelist.nodes) is 0:
 		return path
 	else:
+
+		#Sort list by chosen method
+		nodelist.set_ranks(method, path)
+
+		#Check every node by rank, testing if it satisfies constraints
 		for i in range( len(nodelist.nodes)):
-			temp = nodelist.nodes[i]
-			path.add_node(nodelist.nodes.pop(i))
-			if path.checkit(nodelist):
-				nodelist.set_ranks(method, path)
+			
+			print "\nNode tried: " + str(nodelist.nodes[i].id) + "   Length of nodelist: " + str(len(nodelist.nodes))
+			temp = copy.deepcopy(nodelist.nodes.pop(i))
+			
+			#Add node and see if it satisfies contraints
+			path.add_node(temp)
+
+			if path.checkit(nodelist):				
+				#If constraints are satisfied, go deeper
+				print "-->"
+				for j in range(len(path.nodelist)):
+					print path.nodelist[j].id,
 				result = RBackTracker(path,nodelist,method)
-				return result
-			else:
-				path.nodelist.pop(i)
-				nodelist.nodes.insert(i,temp)
-				print "<--"
+				if result:
+					return result
+
+			#put node back in node list
+			path.remove_node(temp)
+			nodelist.nodes.insert(i,temp)
+
+		#Return list and go back up a level	
+		print "<--"
+		for j in range(len(path.nodelist)):
+			print path.nodelist[j].id,
 		return False
 
 ###############################################
 
 #Initialize and Import
 path = Path()
-node_list = import_data( 'scenario1.txt'  )
+node_list = import_data( 'scenario2.txt'  )
 node_list = Nodelist( node_list )
 path.add_node( node_list.nodes.pop(0) )
-method = 'line'
+method = 'time'
 
 final_path = RBackTracker(path,node_list,method)
 
 # print "-------------------------"
 
-for i in range(len(final_path.nodelist)):
-	print final_path.nodelist[i].id
-	print final_path.nodelist[i].coordinates
-	print final_path.nodelist[i].deadline
-	#print final_path.nodelist[i].rank
-	print "-------------------------"
-
+# for i in range(len(final_path.nodelist)):
+# 	print final_path.nodelist[i].id
+# 	print final_path.nodelist[i].coordinates
+# 	print final_path.nodelist[i].deadline
+# 	#print final_path.nodelist[i].rank
+# 	print "-------------------------"
+# print len(final_path.nodelist)
 
 
 
