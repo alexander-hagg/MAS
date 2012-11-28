@@ -141,10 +141,10 @@ def RBackTracker(_path, _nodelist,method):
 
 #Initialize and Import
 path = Path()
-node_list = import_data( 'scenario4.txt'  )
+node_list = import_data( 'scenario5.txt'  )
 node_list = Nodelist( node_list )
 path.add_node( node_list.nodes.pop(0) )
-method = 'line'
+method = 'time'
 
 evals = 0
 plength = 0
