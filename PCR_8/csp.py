@@ -43,11 +43,8 @@ class Path():
 	def set_time ( self, path ):
 		self.totaltime = 0
 		for i in range(len( self.nodelist ) - 1):
-<<<<<<< HEAD
-			self.totaltime = self.totaltime + eDist( i,i+1 )
-=======
 			self.totaltime = self.totaltime + edist( self.nodelist[i].coordinates,self.nodelist[i+1].coordinates )
->>>>>>> 629b99dd949def1b448d9e33d65c41a6a37d53ba
+
 
 	def get_time ( self ):
 		return self.totaltime
@@ -61,6 +58,8 @@ class Path():
 		self.set_time(self.nodelist)
 
 	def checkit (self, nodelist):
+		global evals
+		evals = evals + 1
 		sofar = self.get_time()
 		for node in nodelist.nodes:
 
@@ -96,9 +95,10 @@ def edist(pt1, pt2):
 	return math.sqrt( math.pow((pt1[1]-pt2[1]),2) + math.pow((pt1[0]-pt2[0]),2) )
 
 def RBackTracker(_path, _nodelist,method):
-	#print "Length" + str(len(nodelist.nodes))
+	global plength
 	path = copy.deepcopy(_path)
 	nodelist = copy.deepcopy(_nodelist)
+
 
 
 	if len(nodelist.nodes) is 0:
@@ -120,6 +120,7 @@ def RBackTracker(_path, _nodelist,method):
 			if path.checkit(nodelist):				
 				#If constraints are satisfied, go deeper
 				print "-->"
+				plength = plength + 1
 				for j in range(len(path.nodelist)):
 					print path.nodelist[j].id,
 				result = RBackTracker(path,nodelist,method)
@@ -140,12 +141,18 @@ def RBackTracker(_path, _nodelist,method):
 
 #Initialize and Import
 path = Path()
-node_list = import_data( 'scenario2.txt'  )
+node_list = import_data( 'scenario4.txt'  )
 node_list = Nodelist( node_list )
 path.add_node( node_list.nodes.pop(0) )
-method = 'time'
+method = 'line'
+
+evals = 0
+plength = 0
 
 final_path = RBackTracker(path,node_list,method)
+
+print "Evaluations: " + str(evals)
+print "Path Length: " + str(plength)
 
 # print "-------------------------"
 
@@ -156,29 +163,3 @@ final_path = RBackTracker(path,node_list,method)
 # 	#print final_path.nodelist[i].rank
 # 	print "-------------------------"
 # print len(final_path.nodelist)
-
-
-
-
-
-'''
-
-Real Manly Functions:
-	RBacktracker(Path, Nodelist)
-		if goal_test:
-			return path
-		else:
-			for every Node in Nodelist: (by rank)
-				pop Node to Path
-				result = RBacktracker(Path, Nodelist) 
-				if result is good 
-					return Path
-				if result is bad
-					put it back
-			return False
-
-Flow:
-	Initialize and import
-	Run the motherfucker
-	print the path
-'''
