@@ -1,5 +1,9 @@
 Alexander Hagg 
+
 Bonn Rhine Sieg University
+
 Master of Autonomous Systems
+
+aichallenge
 ===
-aichallenge - current version of Google AI challenge 2011 
+current version of Google AI challenge 2011
