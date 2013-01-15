@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/motion_model.h
+random
+-
+pose.h
+../include/pose.h
+
+../include/particle.h
+vector
+-
+pose.h
+../include/pose.h
+
+../include/particle_filter.h
+memory
+-
+functional
+-
+particle.h
+../include/particle.h
+motion_model.h
+../include/motion_model.h
+
+../include/pose.h
+iostream
+-
+
+/home/alex/ros/team04/mr_localization/src/particle_filter.cpp
+cmath
+-
+random
+-
+particle_filter.h
+/home/alex/ros/team04/mr_localization/src/particle_filter.h
+iostream
+-
+

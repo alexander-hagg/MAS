@@ -1,0 +1,17 @@
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/ROSBUILD_gensrv_lisp.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/clean-test-results.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/particle_filter.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/pose_likelihood_server.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/rosbuild_precompile.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/rosbuild_premsgsrvgen.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/rospack_genmsg.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/rospack_genmsg_libexe.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/rospack_gensrv.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/test.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/test-future.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/test-results.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/test-results-run.dir
+/home/alex/ros/team04/mr_localization/build/CMakeFiles/tests.dir

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Stage node with "rooms" world and ground truth map publishing -->
+  <include file="$(find mr_stage)/launch/stage.launch">
+    <arg name="world" value="rooms"/>
+    <arg name="map" value="true"/>
+  </include>
+
+  <!-- Occupancy query server node -->
+  <node pkg="mr_binaries" type="occupancy_query_server" name="occupancy_query_server" required="true"/>
+
+  <!-- Pose likelihood server node -->
+  <node pkg="mr_localization" type="pose_likelihood_server" name="pose_likelihood_server" required="true"/>
+
+  <!-- Particle filter node -->
+  <node pkg="mr_localization" type="particle_filter" name="particle_filter" output="screen" required="true">
+    <param name="update_rate" value="5" type="double"/>
+  </node>
+
+</launch>

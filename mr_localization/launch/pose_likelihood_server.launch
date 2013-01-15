@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Stage node with "rooms" world and ground truth map publishing -->
+  <include file="$(find mr_stage)/launch/stage.launch">
+    <arg name="world" value="rooms"/>
+    <arg name="map" value="true"/>
+  </include>
+
+  <!-- Occupancy query server node.
+       Distibuted as a pre-compiled executable in mr_binaries package. -->
+  <node pkg="mr_binaries" type="occupancy_query_server" name="occupancy_query_server" required="true"/>
+
+  <!-- Pose likelihood server node -->
+  <node pkg="mr_localization" type="pose_likelihood_server" name="pose_likelihood_server" output="screen" required="true"/>
+
+</launch>
